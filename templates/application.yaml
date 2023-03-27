@@ -2,10 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: day-2-{{ $.Values.name }}
-  namespace: {{ $.Values.namespace }}
+  namespace: {{ $.Values.application_namespace }}
 spec:
   destination:
     server: {{ $.Values.destination }}
+    namespace: ''
   project: {{ $.Values.project }}
   source:
     helm:
