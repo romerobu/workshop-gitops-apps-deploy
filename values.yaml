@@ -1,5 +1,5 @@
 name: sno-1
-namespace: openshift-operators
+namespace: dev
 destination: https://kubernetes.default.svc
 project: dev
 
