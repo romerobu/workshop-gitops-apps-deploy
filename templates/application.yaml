@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: day-2-{{ $.Values.name }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  destination:
+    server: {{ $.Values.destination }}
+  project: {{ $.Values.project }}
+  source:
+    helm:
+      parameters:
+        - name: global.oauth.enabled
+          value: 'false'
+        - name: global.operators.enabled
+          value: 'false'
+        - name: global.nmstate.enabled
+          value: 'false'
+        - name: global.monitoring.enabled
+          value: 'false'     
+        - name: global.namespace.enabled
+          value: 'false'                         
+        - name: global.bookinfo.enabled
+          value: 'false'     
+        - name: operators.nmstate.enabled
+          value: 'false'              
+      valueFiles:
+        - charts/operators/values.yaml
+        - charts/oauth/values.yaml
+        - charts/bookinfo/values.yaml
+        - charts/monitoring/values.yaml   
+        - charts/nmstate/values.yaml  
+        - charts/namespace/values.yaml  
+    path: {{ $.Values.code.path }}
+    repoURL: {{ $.Values.code.repo }}
+    targetRevision: {{ $.Values.code.target }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

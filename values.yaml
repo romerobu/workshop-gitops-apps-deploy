@@ -1,0 +1,9 @@
+name: sno-1
+namespace: openshift-operators
+destination: https://kubernetes.default.svc
+project: dev
+
+code:
+  repo: https://github.com/romerobu/helm-infra-gitops-workshop.git
+  path: .
+  target: main
