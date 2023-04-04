@@ -1,4 +1,4 @@
-name: sno-1
+name: sno-<name>
 application_namespace: openshift-operators
 namespace: ''
 destination: 'https://kubernetes.default.svc'
