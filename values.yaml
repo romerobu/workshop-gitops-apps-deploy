@@ -1,10 +1,11 @@
-name: sno-<name>
-application_namespace: openshift-operators
-namespace: ''
-destination: 'https://kubernetes.default.svc'
-project: default
+clusters:
+  sno-<name>:
+    application_namespace: openshift-operators
+    namespace: ''
+    destination: 'https://kubernetes.default.svc'
+    project: default
+    code:
+      repo: https://github.com/romerobu/helm-infra-gitops-workshop.git
+      path: .
+      target: main    
 
-code:
-  repo: https://github.com/romerobu/helm-infra-gitops-workshop.git
-  path: .
-  target: main

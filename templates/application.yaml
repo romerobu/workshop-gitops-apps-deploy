@@ -1,13 +1,15 @@
+{{- range $key, $val := $.Values.clusters }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: day-2-{{ $.Values.name }}
-  namespace: {{ $.Values.application_namespace }}
+  name: day-2-{{ $key }}
+  namespace: {{ $val.application_namespace }}
 spec:
   destination:
-    server: {{ $.Values.destination }}
+    server: {{ $val.destination }}
     namespace: ''
-  project: {{ $.Values.project }}
+  project: {{ $val.project }}
   source:
     helm:
       parameters:
@@ -32,10 +34,11 @@ spec:
         - charts/monitoring/values.yaml   
         - charts/nmstate/values.yaml  
         - charts/namespace/values.yaml  
-    path: {{ $.Values.code.path }}
-    repoURL: {{ $.Values.code.repo }}
-    targetRevision: {{ $.Values.code.target }}
+    path: {{ $val.code.path }}
+    repoURL: {{ $val.code.repo }}
+    targetRevision: {{ $val.code.target }}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+{{- end }}      
